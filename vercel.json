@@ -1,0 +1,25 @@
+{
+  "routes": [
+    { "handle": "filesystem" },
+    {
+      "src": "/students",
+      "dest": "/students"
+    },
+    {
+      "src": "/teachers",
+      "dest": "/teachers"
+    },
+    {
+      "src": "/subjects",
+      "dest": "/subjects"
+    },
+    {
+      "src": "/.*",
+      "status": 404,
+      "dest": "/404.html"
+    }
+  ],
+  "env": {
+    "DB_PATH": "./school.db"
+  }
+}
