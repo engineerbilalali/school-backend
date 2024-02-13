@@ -6,16 +6,26 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
+// Allow requests from specific origins
+const allowedOrigins = ['https://school-react-frontend.netlify.app'];
 app.use(cors({
-  origin: 'https://school-react-frontend.netlify.app'
+  origin: allowedOrigins
 }));
+
 app.use(express.json());
 
 // Initialize SQLite database
-const db = new sqlite3.Database('./school.db');
+const db = new sqlite3.Database('./school.db', sqlite3.OPEN_READWRITE, (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Connected to the school database.');
+});
 
 // Setting up the table for students
 db.run('CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT)');
+
+
 
 // Routes
 
@@ -185,13 +195,12 @@ app.delete('/subjects/:id', (req, res) => {
 
 
 
-
-
+// Start the server
 app.listen(port, () => {
-    console.log(`Server started on http://localhost:${port}`);
+  console.log(`Server started on http://localhost:${port}`);
 });
 
-
+// Welcome message route
 app.get('/', (req, res) => {
   res.json({ message: "Welcome to the School API!" });
 });
