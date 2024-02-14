@@ -7,9 +7,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Allow requests from specific origins
-const allowedOrigins = ['https://school-react-frontend.netlify.app'];
+// const allowedOrigins = ['https://school-react-frontend.netlify.app'];
 app.use(cors({
-  origin: allowedOrigins,
+  origin: `*`,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type'],
 }));
